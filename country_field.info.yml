@@ -1,0 +1,6 @@
+name: Country Field
+type: module
+description: Create Drupal 8 Country Field.
+package: Custom
+core: 8.x
+
