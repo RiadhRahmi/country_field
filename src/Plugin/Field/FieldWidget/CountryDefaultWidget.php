@@ -79,12 +79,15 @@ class CountryDefaultWidget extends WidgetBase implements WidgetInterface  {
      */
     public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state)
     {
-        $elements = [];
-        $elements['country'] = [
+        $countries = \Drupal::service('country_manager')->getList();
+        $element['country'] = array(
             '#type' => 'select',
-            '#options' => \Drupal::service('country_manager')->getList(),
-            '#title' => t('Select country')
-        ];
-        return $elements;
+            '#options' => $countries,
+            '#empty_value' => '',
+            '#default_value' => (isset($items[$delta]->country) && isset($countries[$items[$delta]->country])) ? $items[$delta]->country : NULL,
+            '#title' => $this->t('Select a country'),
+        );
+        return $element;
+
     }
 }

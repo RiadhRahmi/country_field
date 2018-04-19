@@ -15,6 +15,7 @@ use Drupal\Core\TypedData\DataDefinition;
 * @FieldType(
 *   id = "country_field",
 *   label = @Translation("Country"),
+ *  category = @Translation("Custom"),
 *   default_widget = "country_default_widget",
 *   default_formatter = "country_default_formatter"
 * )
@@ -36,7 +37,8 @@ class CountryFieldItem extends FieldItemBase implements FieldItemInterface {
      */
     public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition)
     {
-        $properties['country'] = DataDefinition::create('string')->setLabel(t('Country'));
+        $properties['country'] = DataDefinition::create('string')
+            ->setLabel(t('Country'));
         return $properties;
     }
 
@@ -79,19 +81,17 @@ class CountryFieldItem extends FieldItemBase implements FieldItemInterface {
      */
     public static function schema(FieldStorageDefinitionInterface $field_definition)
     {
-        return [
-            'columns' => [
-                'country' => [
+        return array(
+            'columns' => array(
+                'country' => array(
                     'type' => 'char',
                     'length' => 2,
-                    'description' => t('Country Field'),
-                ],
-            ],
-            'indexes' => [
-                
-            ]
-        ];
-
+                    'not null' => FALSE,
+                ),
+            ),
+            'indexes' => array(
+            ),
+        );
     }
 
 

@@ -37,17 +37,16 @@ class CountryDefaultFormatter extends FormatterBase {
      */
     public function viewElements(FieldItemListInterface $items, $langcode)
     {
-        $elements = [];
+        $elements = array();
         $countries = \Drupal::service('country_manager')->getList();
-        foreach ($items as $delta => $item){
-            if(isset($countries[$item->country])){
-                $elements[$delta] = [
+        foreach ($items as $delta => $item) {
+            if (isset($countries[$item->country])) {
+                $elements[$delta] = array(
                     '#theme' => 'country_field',
                     '#country' => $countries[$item->country],
-                ];
+                );
             }
         }
-
         return $elements;
     }
 }
